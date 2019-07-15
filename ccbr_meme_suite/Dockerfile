@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER Skyler Kuhn <kuhnsa3@gmail.com>
 
 # Here is an exhaustive list of everything MEME Suite needs: http://meme-suite.org/doc/install.html?man_type=web#prerequisite
 

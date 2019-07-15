@@ -1,5 +1,4 @@
 FROM ubuntu:16.04
-MAINTAINER Skyler Kuhn <kuhnsa3@gmail.com>
 
 RUN mkdir -p /data
 RUN mkdir -p /opt
