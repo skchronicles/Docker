@@ -1,4 +1,4 @@
-# QualiMap from Conda
+# Seurat (3.0.1) from Conda
 FROM conda/miniconda2
 
 # R Packages: seurat (>3)
