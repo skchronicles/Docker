@@ -132,9 +132,13 @@ docker push skchronicles/ccbr_bagfootr:latest
 ### Run `bagfootr` with included test data
 ``` bash
 # Docker
-docker run -v $PWD:/data2 ccbr_bagfootr:v0.0.1 bash /home/bagfootr/scripts/shell_call_hla_type_test /home/bagfootr/test/test.bam Unknown 1 hg19 STDFQ 1 test_docker_dir 
+docker run -v $PWD:/data2 ccbr_bagfootr:v0.0.1 R
+> # type in R console
+> source("bagfoot_run_example.R") 
 
 # Singularity
-singularity pull docker://skchronicles/ccbr_bagfootr:v0.0.1-beta
-singularity exec -B "$PWD:/data2/" ccbr_bagfootr_v0.0.1-beta.sif bash /home/bagfootr/scripts/shell_call_hla_type_test /home/bagfootr/test/test.bam Unknown 0 hg19 STDFQ 0 test_singularity_dir
+singularity pull docker://skchronicles/ccbr_bagfootr:v0.0.1
+singularity exec -B "$PWD:/data2/" ccbr_bagfootr_v0.0.1.sif R
+> # type in R console 
+> source("bagfoot_run_example.R")
 ```
