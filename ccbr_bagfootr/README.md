@@ -130,15 +130,37 @@ docker push skchronicles/ccbr_bagfootr:latest
 ```
 
 ### Run `bagfootr` with included test data
+**Docker**
 ``` bash
 # Docker
 docker run -v $PWD:/data2 ccbr_bagfootr:v0.0.1 R
 > # type in R console
 > source("bagfoot_run_example.R") 
+```
+**Singularity**
+```bash  
+# Step 0.) ssh into Biowulf with X11 forwarding enabled
+ssh -Y $USER@biowulf.nih.gov
 
-# Singularity
-singularity pull docker://skchronicles/ccbr_bagfootr:v0.0.1
-singularity exec -B "$PWD:/data2/" ccbr_bagfootr_v0.0.1.sif R
-> # type in R console 
+# Step 1.) Grab an interactive node
+sinteractive --mem=64g --cpus-per-task=6
+mkdir -p /scratch/$USER/bagfoot && cd /scratch/$USER/bagfoot
+
+# Step 2.) Pull image from DockerHub and convert to singularity image
+module load singularity
+SINGULARITY_CACHEDIR=$PWD singularity pull -F docker://sojbaek/bagfoot 
+
+# Step 3.) Pull in example resources (avoids problem with non-writable container file-system)
+wget https://sourceforge.net/projects/bagfootr/files/example_data.tar.gz
+tar -xvf example_data.tar.gz
+wget https://sourceforge.net/projects/bagfootr/files/bagfoot_prep_example.R
+wget https://sourceforge.net/projects/bagfootr/files/bagfoot_run_example.R
+
+# Step 4.) Mount PWD with /home/bagfoot (overrides container filesystem with PWD)
+singularity exec -B $PWD:/home/bagfoot bagfoot_latest.sif /bin/bash
+## Step 4.1) In container interactive shell, start R console
+user@container:~$ cd /home/bagfoot/
+user@container:/home/bagfoot/$ R
+## Step 4.2) In container R console, source test script
 > source("bagfoot_run_example.R")
 ```
