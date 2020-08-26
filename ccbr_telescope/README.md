@@ -2,9 +2,9 @@
 
 Characterization of Human Endogenous Retrovirus (HERV) expression within the transcriptomic landscape using RNA-seq is complicated by uncertainty in fragment assignment because of sequence similarity. Telescope is a computational method that provides accurate estimation of transposable element expression (retrotranscriptome) resolved to specific genomic locations. Telescope directly addresses uncertainty in fragment assignment by reassigning ambiguously mapped fragments to the most probable source transcript as determined within a Bayesian statistical model.
 
-Telescope can be installed from [Github](https://github.com/mlbendall/telescope).
+Telescope can be installed from [Github](https://github.com/mlbendall/telescope). It can be installed using Conda, but I did not go down that route. This repository contains the Dockerfile to build Telescope from scratch along with a few other tools.
 
-The Dockerfile will install Cutadapt, bowtie2, SAMtools, and telescope. Small reference files are located in `/opt2/refs/` in the container's filesystem. 
+The Dockerfile will install Cutadapt, bowtie2, SAMtools, HTSlib, and Telescope. Small reference files are located in `/opt2/refs/` in the container's filesystem. 
 
 Currently, the following files are located in `/opt2/refs/`:
  - trimmonatic_TruSeqv3_adapters.fa
