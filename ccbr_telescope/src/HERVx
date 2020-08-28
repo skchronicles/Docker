@@ -4,7 +4,7 @@ set -euo pipefail
 
 function usage() { cat << EOF
 
-HERVx: Pipeline to characterizes of Human Endogenous Retrovirus (HERV) expression
+HERVx: Pipeline to characterize Human Endogenous Retrovirus (HERV) expression
 
 USAGE:
     HERVx [OPTIONS] -r1 SRR4235541_1.fastq -r2 SRR4235541_2.fastq -o outdir_path
@@ -165,7 +165,7 @@ function main(){
   base=$(basename "${Arguments[r1]}" | sed 's/_[1-2].fastq$//g')
   read1="${Arguments[r1]}"; read2="${Arguments[r2]}"
   outdir="${Arguments[o]%/}"
-  threads="${Arguments[t]-4}" # default is 8 threads
+  threads="${Arguments[t]-4}" # default is 4 threads
 
   # HERVx Pipeline
   trim "$base" "$read1" "$read2" "${outdir}/trim" "$threads"
