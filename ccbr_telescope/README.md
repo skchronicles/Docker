@@ -50,3 +50,15 @@ module load singularity
 SINGULARITY_CACHEDIR=$PWD singularity pull -F docker://nciccbr/ccbr_telescope
 singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif ./HERVx -r1 small_S25_1.fastq -r2 small_S25_2.fastq -o ERV_hg38
 ```
+
+### Build bowtie2 indices
+```bash
+# Get UCSC hg38 genome
+wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+zcat hg38.fa.gz > hg38.fa
+
+# Build the indices
+module load singularity
+SINGULARITY_CACHEDIR=$PWD singularity pull -F docker://nciccbr/ccbr_telescope
+singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif bowtie2-build hg38.fa hg38
+```
