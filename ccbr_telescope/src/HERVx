@@ -34,8 +34,8 @@ OPTIONS:
 
 Example:
     $ HERVx -r1 /tmp/SRR4235541_1.fastq -r2 /tmp/SRR4235541_2.fastq -outdir ERV_hg38
-    $ singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif \
-                       ./HERVx -r1 S25_1.fastq -r2 small_S25_2.fastq -o ERV_hg38
+    $ singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif ./HERVx -r1 S25_1.fastq -r2 small_S25_2.fastq -o ERV_hg38
+
 NOTES:
     + DockerHub: https://hub.docker.com/repository/docker/nciccbr/ccbr_telescope
     + Reference files are located in /opt2/ in the container's filesystem.
@@ -126,7 +126,7 @@ function align(){
 
   mkdir -p "${4}"
   bowtie2 -p "${5}" -k 100 --very-sensitive-local --score-min "L,0,1.6" \
-          -x refs/bowtie2/hg38 -1 "${2}" -2 "${3}" \
+          -x /opt2/bowtie2/hg38 -1 "${2}" -2 "${3}" \
           -S ${4}/${1}_bowtie.sam
 
   # Step 3.) SAMtools: covert SAM to BAM and sort by name

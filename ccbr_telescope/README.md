@@ -10,8 +10,11 @@ Currently, the following files are located in `/opt2/refs/`:
  - trimmonatic_TruSeqv3_adapters.fa
  - HERV_rmsk.hg38.v2.genes.gtf
  - HERV_rmsk.hg38.v2.transcripts.gtf
+ - L1Base.hg38.v1.transcripts.gtf
+ - retro.hg38.v1.transcripts.gtf
 
-> **Please Note:** Large reference files are not bundled in the container's filesystem (i.e bowtie2 indices). As so, you will need to mount the host filesystem to the container filesystem.
+
+> **Please Note:** Bowtie2 indices for `hg38` are bundled in the container's filesystem in `/opt2/bowtie2/`. Other indices can be provided by mounting the host filesystem to this PATH (overrides current hg38 indices).
 
 ### Build from Dockerfile
 
