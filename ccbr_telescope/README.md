@@ -51,7 +51,10 @@ docker push nciccbr/ccbr_telescope:latest
 module load singularity
 # Pull from DockerHub
 SINGULARITY_CACHEDIR=$PWD singularity pull -F docker://nciccbr/ccbr_telescope
-singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif ./HERVx -r1 small_S25_1.fastq -r2 small_S25_2.fastq -o ERV_hg38
+# Display usage and help information 
+singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif HERVx -h
+# Run HERVx pipeline
+singularity exec -B $PWD:$PWD ccbr_telescope_latest.sif HERVx -r1 small_S25_1.fastq -r2 small_S25_2.fastq -o ERV_hg38
 ```
 
 ### Build bowtie2 indices
