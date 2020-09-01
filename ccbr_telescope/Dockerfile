@@ -96,6 +96,12 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
    && /usr/sbin/update-locale LANG=en_US.UTF-8
 
 
+# Add HERVx pipeline PATH
+RUN mkdir -p /opt2/HERVx/
+COPY src/HERVx /opt2/HERVx/
+ENV PATH=${PATH}:/opt2/HERVx
+
+
 # Copy the Dockerfile used to create image in /opt2
 COPY Dockerfile /opt2
 WORKDIR /data2
