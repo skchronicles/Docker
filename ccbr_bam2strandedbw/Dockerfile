@@ -36,5 +36,9 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
 # Add QualiMap to PATH
 ENV PATH="/opt2/ucsc":$PATH
 
+# Silencing demand GNU parallel citation 
+# Users of this Docker Image must agree to citing GNU Parallel
+RUN echo "will cite" | parallel --citation
+
 COPY Dockerfile /opt2/
 WORKDIR /data2
