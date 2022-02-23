@@ -36,13 +36,23 @@ RUN apt-get update \
 # Set the locale
 RUN localedef -i en_US -f UTF-8 en_US.UTF-8
 
-# Install Pisces and create env
-# variables for ease of use
+# Install Pisces 5.2.10.49 and create env
+# variables and a wrapper for ease of use 
 RUN wget https://github.com/Illumina/Pisces/releases/download/v5.2.10.49/Pisces_5.2.10.49.tar.gz \
     && tar -xvf Pisces_5.2.10.49.tar.gz \
     && rm Pisces_5.2.10.49.tar.gz 
 ENV PISCES_PATH="/opt2/Pisces_5.2.10.49/"
-RUN echo 'alias pisces="dotnet ${PISCES_PATH}/Pisces.dll"' >> ~/.bashrc
+RUN echo '#!/bin/bash' > /opt2/Pisces5.2 \
+    && echo 'dotnet ${PISCES_PATH}/Pisces.dll "$@"' >> /opt2/Pisces5.2 \
+    && chmod a+rx /opt2/Pisces5.2
+
+# Install Pisces 5.3.0.0 and create env
+# variables for ease of use
+RUN curl -OL https://github.com/tamsen/Pisces/raw/master/binaries/5.3.0.0/pisces_all_5.3.0.0.tar.gz \
+    && tar -xvf pisces_all_5.3.0.0.tar.gz \
+    && rm pisces_all_5.3.0.0.tar.gz \
+    && ln -s /opt2/pisces_all/Pisces /opt2/ \
+    && ln -s /opt2/pisces_all/Pisces /opt2/Pisces5.3
 
 # Add Dockerfile and argparse.bash script
 # and export environment variables
